@@ -1,5 +1,14 @@
 /base_instasell.sql
 /includes
-/loja
+/loja/includes
+/loja/valida.php
+/loja/logout.php
+/loja/login.php
 /admin/includes
-/cliente
+/admin/valida.php
+/admin/logout.php
+/admin/login.php
+/cliente/includes
+/cliente/valida.php
+/cliente/logout.php
+/cliente/login.php
