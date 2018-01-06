@@ -76,11 +76,11 @@ if($acao == ''){
     <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>ID</th>
+                <th style="width: 10px;">ID</th>
                 <th>Cliente</th>
                 <th>Produto</th>
-                <th>Valor</th>
-            	<th style="width: 100px;">Opções</th>
+                <th style="width: 10px;">Valor</th>
+            	<th style="width: 10px;">Opções</th>
             </tr>
         </thead>
         <tbody>
@@ -98,7 +98,7 @@ if($acao == ''){
                     echo '<td>'.$cliente['nome'].'</td>';
                     echo '<td>'.$produto['nome'].'</td>';
         			echo '<td><b>R$'.number_format($venda['valor_total'], 2, ',', '.').'</b></td>';
-                    echo '<td><a href="vendas.php?acao=editar&id='.$venda['id'].'" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a></td>';
+                    echo '<td><a href="vendas.php?acao=editar&id='.$venda['id'].'" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Visualizar</a></td>';
                     echo '</tr>';
         		}
         	?>

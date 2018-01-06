@@ -72,15 +72,15 @@
 <?
 if($acao == ''){
 ?>
-    <h2><b>Loja - <?=$loja['nome']?></b> <a href="produtos.php?acao=novo&id_loja=<?=$id_loja?>" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Adicionar</a></h2><hr>
+    <h2><b>Loja - <?=$loja['nome']?></b> <a href="produtos.php?acao=novo&id_loja=<?=$loja['id']?>" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Adicionar</a></h2><hr>
     <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>ID</th>
+                <th style="width: 10px;">ID</th>
                 <th>Nome</th>
-                <th>Quantidade</th>
-                <th>Valor</th>
-            	<th style="width: 100px;">Opções</th>
+                <th style="width: 10px;">Qnt</th>
+                <th style="width: 10px;">Valor</th>
+            	<th style="width: 10px;">Opções</th>
             </tr>
         </thead>
         <tbody>
@@ -92,7 +92,7 @@ if($acao == ''){
                     echo '<td>'.$loja['nome'].'</td>';
         			echo '<td>'.$loja['quantidade'].'</td>';
                     echo '<td><b>R$'.number_format($loja['valor'], 2, ',', '.').'</b></td>';
-        			echo '<td><a href="produtos.php?acao=editar&id='.$loja['id'].'&id_loja='.$_SESSION['lojistaidloja'].'" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a> <a href="produtos.php?acao=deletar&id='.$loja['id'].'" class="btn btn-danger btn-xs btnremover"><i class="fa fa-trash"></i></a></td>';
+        			echo '<td><a href="produtos.php?acao=editar&id='.$loja['id'].'&id_loja='.$_SESSION['lojistaidloja'].'" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Editar</a> <a href="produtos.php?acao=deletar&id='.$loja['id'].'" class="btn btn-danger btn-xs btnremover"><i class="fa fa-trash"></i> Excluir</a></td>';
                     echo '</tr>';
         		}
         	?>
@@ -116,33 +116,36 @@ if($acao == 'editar' or $acao == 'novo'){
 
     <form method="POST" action="">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label>Nome</label>
-                <input type="hidden" name="txtidloja" value="<?=$id_loja?>">
-                <input type="text" class="form-control" name="txtnome" placeholder="Digite o nome da loja." value="<?=(($acao == 'editar')?$editar['nome']:'')?>" required>
+                <input type="hidden" name="txtidloja" value="<?=$loja['id']?>">
+                <input type="text" class="form-control" name="txtnome" placeholder="" value="<?=(($acao == 'editar')?$editar['nome']:'')?>" required>
             </div>
-         	<div class="col-md-4">
-                <label>Descrição</label>
-                <input type="text" name="txtdescricao" class="form-control" placeholder="Digite o seu CNPJ." value="<?=(($acao == 'editar')?$editar['descricao']:'')?>">
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <label>Valor</label>
-                <input type="text" name="txtvalor" class="form-control" placeholder="Digite o seu CPF." value="<?=(($acao == 'editar')?$editar['valor']:'')?>">
+                <input type="text" name="txtvalor" onkeyup="moeda(this)" class="form-control" placeholder="" value="<?=(($acao == 'editar')?number_format($editar['valor'], 2, ',', '.'):'')?>">
+            </div>
+            <div class="col-md-2">
+                <label>Quantidade</label>
+                <input type="text" class="form-control" name="txtquantidade" placeholder="" value="<?=(($acao == 'editar')?$editar['quantidade']:'')?>" required>
+            </div>
+            <div class="col-md-2">
+                <label>Ativo</label>
+                <select class="form-control" name="txtativo">
+                    <option value="1" <?=(($acao == 'editar')?(($editar['ativo'] == 1)?'selected = "selected"':''):'')?>>Sim</option>
+                    <option value="0" <?=(($acao == 'editar')?(($editar['ativo'] == 0)?'selected = "selected"':''):'')?>>Não</option>
+                </select>
             </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4">
-                <label>Quantidade</label>
-                <input type="text" class="form-control" name="txtquantidade" placeholder="Digite o nome da loja." value="<?=(($acao == 'editar')?$editar['quantidade']:'')?>" required>
+            <div class="col-md-6">
+                <label>Descrição</label>
+                <textarea class="form-control" rows="5" name="txtdescricao"><?=(($acao == 'editar')?$editar['descricao']:'')?></textarea>
             </div>
-         	<div class="col-md-4">
-                <label>Ativo</label>
-                <input type="text" name="txtativo" class="form-control" placeholder="Digite o seu CNPJ." value="<?=(($acao == 'editar')?$editar['ativo']:'')?>" required>
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label>Foto Principal</label>
-                <input type="text" name="txtfotoprincipal" class="form-control" placeholder="Digite o seu CPF." value="<?=(($acao == 'editar')?$editar['foto_principal']:'')?>" required>
+                <input type="file" class="form-control" name="txtfotoprincipal">
             </div>
         </div>
         <hr>
