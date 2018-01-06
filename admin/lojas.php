@@ -81,11 +81,11 @@ if($acao == ''){
     <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>ID</th>
+                <th style="width: 10px;">ID</th>
                 <th>Nome</th>
-                <th>CNPJ</th>
-                <th>CPF</th>
-            	<th style="width: 100px;">Opções</th>
+                <th style="width: 10px;">CNPJ</th>
+                <th style="width: 10px;">CPF</th>
+            	<th style="width: 10px;">Opções</th>
             </tr>
         </thead>
         <tbody>
@@ -97,7 +97,7 @@ if($acao == ''){
         			echo '<td>'.$loja['nome'].'</td>';
                     echo '<td>'.$loja['cnpj'].'</td>';
                     echo '<td>'.$loja['cpf'].'</td>';
-        			echo '<td><a href="lojas.php?acao=editar&id='.$loja['id'].'" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a> <a href="lojas.php?acao=deletar&id='.$loja['id'].'" class="btn btn-danger btn-xs btnremover"><i class="fa fa-trash"></i></a> <a href="lojas_produtos.php?id_loja='.$loja['id'].'" class="btn btn-success btn-xs" title="Adicionar Produtos"><i class="fa fa-plus"></i></a></td>';
+        			echo '<td><a href="lojas.php?acao=editar&id='.$loja['id'].'" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Editar</a> <a href="lojas.php?acao=deletar&id='.$loja['id'].'" class="btn btn-danger btn-xs btnremover"><i class="fa fa-trash"></i> Excluir</a> <a href="lojas_produtos.php?id_loja='.$loja['id'].'" class="btn btn-success btn-xs" title="Adicionar Produtos"><i class="fa fa-plus"></i> Produtos</a></td>';
                     echo '</tr>';
         		}
         	?>

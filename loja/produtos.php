@@ -72,7 +72,7 @@
 <?
 if($acao == ''){
 ?>
-    <h2><b>Loja - <?=$loja['nome']?></b> <a href="produtos.php?acao=novo&id_loja=<?=$loja['id']?>" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Adicionar</a></h2><hr>
+    <h2><b>Produtos</b> <a href="produtos.php?acao=novo&id_loja=<?=$loja['id']?>" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Adicionar</a></h2><hr>
     <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -92,7 +92,7 @@ if($acao == ''){
                     echo '<td>'.$loja['nome'].'</td>';
         			echo '<td>'.$loja['quantidade'].'</td>';
                     echo '<td><b>R$'.number_format($loja['valor'], 2, ',', '.').'</b></td>';
-        			echo '<td><a href="produtos.php?acao=editar&id='.$loja['id'].'&id_loja='.$_SESSION['lojistaidloja'].'" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Editar</a> <a href="produtos.php?acao=deletar&id='.$loja['id'].'" class="btn btn-danger btn-xs btnremover"><i class="fa fa-trash"></i> Excluir</a></td>';
+        			echo '<td><a href="produtos.php?acao=editar&id='.$loja['id'].'&id_loja='.$_SESSION['lojistaidloja'].'" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Editar</a> <a href="'.$loja['url'].'" class="btn btn-success btn-xs"><i class="fa fa-link"></i> Link Produto</a> <a href="produtos.php?acao=deletar&id='.$loja['id'].'" class="btn btn-danger btn-xs btnremover"><i class="fa fa-trash"></i> Excluir</a></td>';
                     echo '</tr>';
         		}
         	?>

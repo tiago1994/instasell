@@ -75,11 +75,11 @@ if($acao == ''){
     <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>ID</th>
+                <th style="width: 10px;">ID</th>
                 <th>Nome</th>
                 <th>Email</th>
-                <th>Privilegio</th>
-            	<th style="width: 100px;">Opções</th>
+                <th style="width: 10px;">Privilegio</th>
+            	<th style="width: 10px;">Opções</th>
             </tr>
         </thead>
         <tbody>
@@ -91,7 +91,7 @@ if($acao == ''){
         			echo '<td>'.$usuario['nome'].'</td>';
                     echo '<td>'.$usuario['email'].'</td>';
         			echo '<td>'.(($usuario['privilegio'] == 10)?'Admin':'Usuário').'</td>';
-        			echo '<td><a href="usuarios.php?acao=editar&id='.$usuario['id'].'" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a> <a href="usuarios.php?acao=deletar&id='.$usuario['id'].'" class="btn btn-danger btn-xs btnremover"><i class="fa fa-trash"></i></a> '.(($usuario['privilegio'] == 1)?'<a href="usuarios_curso.php?id_usuario='.$usuario['id'].'" class="btn btn-success btn-xs"><i class="fa fa-plus"></i></a>':'').'</td>';
+        			echo '<td><a href="usuarios.php?acao=editar&id='.$usuario['id'].'" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Editar</a> <a href="usuarios.php?acao=deletar&id='.$usuario['id'].'" class="btn btn-danger btn-xs btnremover"><i class="fa fa-trash"></i> Excluir</a></td>';
                     echo '</tr>';
         		}
         	?>

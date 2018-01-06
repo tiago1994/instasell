@@ -122,33 +122,33 @@ if($acao == 'editar' or $acao == 'novo'){
 
     <form method="POST" action="">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label>Nome</label>
                 <input type="hidden" name="txtidloja" value="<?=$id_loja?>">
                 <input type="text" class="form-control" name="txtnome" placeholder="Digite o nome da loja." value="<?=(($acao == 'editar')?$editar['nome']:'')?>" required>
             </div>
-         	<div class="col-md-4">
-                <label>Descrição</label>
-                <input type="text" name="txtdescricao" class="form-control" placeholder="Digite o seu CNPJ." value="<?=(($acao == 'editar')?$editar['descricao']:'')?>">
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <label>Valor</label>
-                <input type="text" name="txtvalor" class="form-control" placeholder="Digite o seu CPF." value="<?=(($acao == 'editar')?$editar['valor']:'')?>">
+                <input type="text" name="txtvalor" onkeyup="moeda(this)" class="form-control" placeholder="Digite o seu CPF." value="<?=(($acao == 'editar')?number_format($editar['valor'], 2, ',', '.'):'')?>">
+            </div>
+            <div class="col-md-2">
+                <label>Quantidade</label>
+                <input type="text" class="form-control" name="txtquantidade" placeholder="Digite o nome da loja." value="<?=(($acao == 'editar')?$editar['quantidade']:'')?>" required>
+            </div>
+            <div class="col-md-2">
+                <label>Ativo</label>
+                <input type="text" name="txtativo" class="form-control" placeholder="Digite o seu CNPJ." value="<?=(($acao == 'editar')?$editar['ativo']:'')?>" required>
             </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4">
-                <label>Quantidade</label>
-                <input type="text" class="form-control" name="txtquantidade" placeholder="Digite o nome da loja." value="<?=(($acao == 'editar')?$editar['quantidade']:'')?>" required>
+            <div class="col-md-6">
+                <label>Descrição</label>
+                <textarea class="form-control" rows="5" name="txtdescricao"><?=(($acao == 'editar')?$editar['descricao']:'')?></textarea>
             </div>
-         	<div class="col-md-4">
-                <label>Ativo</label>
-                <input type="text" name="txtativo" class="form-control" placeholder="Digite o seu CNPJ." value="<?=(($acao == 'editar')?$editar['ativo']:'')?>" required>
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label>Foto Principal</label>
-                <input type="text" name="txtfotoprincipal" class="form-control" placeholder="Digite o seu CPF." value="<?=(($acao == 'editar')?$editar['foto_principal']:'')?>" required>
+                <input type="file" name="txtfotoprincipal" class="form-control">
             </div>
         </div>
         <hr>

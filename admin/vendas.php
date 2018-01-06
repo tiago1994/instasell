@@ -3,65 +3,65 @@
 	$_SESSION['pagina'] = 'vendas';
     require_once('includes/topo.php');
 
-    $acao   = ((isset($_REQUEST['acao']))?$_REQUEST['acao']:'');
-    $id     = ((isset($_REQUEST['id']))?$_REQUEST['id']:'');
+    $acao           = ((isset($_REQUEST['acao']))?$_REQUEST['acao']:'');
+    $id             = ((isset($_REQUEST['id']))?$_REQUEST['id']:'');
 
     if(isset($_POST['btn-adicionar'])){
-        $nome 		= $_POST['txtnome'];
-        $email 		= $_POST['txtemail'];
-        $senha 		= md5($_POST['txtsenha']);
+        $id_loja 		    = $_POST['txtidloja'];
+        $nome               = $_POST['txtnome'];
+        $descricao          = $_POST['txtdescricao'];
+        $valor              = $_POST['txtvalor'];
+        $quantidade         = $_POST['txtquantidade'];
+        $ativo              = $_POST['txtativo'];
+        $foto_principal     = $_POST['txtfotoprincipal'];
         
-        if($senha == ''){
-            header('Location: logout.php');
-            exit();
-        }else{
-            $add = mysqli_query($link, 'INSERT INTO cliente (nome, email, senha) VALUES ("'.$nome.'", "'.$email.'", "'.$senha.'")');
-        }
+        $add = mysqli_query($link, 'INSERT INTO loja_produto (id_loja, nome, descricao, valor, quantidade, ativo, foto_principal) VALUES ("'.$id_loja.'", "'.$nome.'", "'.$descricao.'", "'.$valor.'", "'.$quantidade.'", "'.$ativo.'", "'.$foto_principal.'")');
+
         if($add){
-            header('Location: vendas.php?retorno=1');
+            header('Location: produtos.php?retorno=1');
             exit();
         }else{
-            header('Location: vendas.php?retorno=0');
+            header('Location: produtos.php?retorno=0');
             exit();
         }
     }
     if(isset($_POST['btn-atualizar'])){
-        $nome = $_POST['txtnome'];
-        $email = $_POST['txtemail'];
-        $senha = md5($_POST['txtsenha']);
+        $id_loja            = $_POST['txtidloja'];
+        $nome               = $_POST['txtnome'];
+        $descricao          = $_POST['txtdescricao'];
+        $valor              = $_POST['txtvalor'];
+        $quantidade         = $_POST['txtquantidade'];
+        $ativo              = $_POST['txtativo'];
+        $foto_principal     = $_POST['txtfotoprincipal'];
 
-        if($_POST['txtsenha'] == ''){
-            $att = mysqli_query($link, 'UPDATE cliente SET nome = "'.$nome.'", email = "'.$email.'" WHERE id = "'.$id.'" LIMIT 1');
-        }else{
-            $att = mysqli_query($link, 'UPDATE cliente SET nome = "'.$nome.'", email = "'.$email.'", senha = "'.$senha.'" WHERE id = "'.$id.'" LIMIT 1');
-        }
+        $att = mysqli_query($link, 'UPDATE loja_produto SET nome = "'.$nome.'", descricao = "'.$descricao.'", valor = "'.$valor.'", quantidade = "'.$quantidade.'", ativo = "'.$ativo.'", foto_principal = "'.$foto_principal.'" WHERE id = "'.$id.'" LIMIT 1');
 
         if($att){
-            header('Location: vendas.php?retorno=1');
+            header('Location: produtos.php?&retorno=1');
             exit();
         }else{
-            header('Location: vendas.php?retorno=0');
+            header('Location: produtos.php?retorno=0');
             exit();
         }
     }
     if($acao == 'editar'){
-        $edd = mysqli_query($link, 'SELECT * FROM cliente WHERE id = "'.$id.'" LIMIT 1');
+        $edd = mysqli_query($link, 'SELECT * FROM loja_produto WHERE id = "'.$id.'" LIMIT 1');
         
         if(mysqli_num_rows($edd) > 0){
             $editar = mysqli_fetch_array($edd);
         }else{
-            header('Location: vendas.php?retorno=0');
+            header('Location: produtos.php?retorno=0');
             exit();   
         }
     }
     if($acao == 'deletar'){
-        $del = mysqli_query($link, 'DELETE FROM cliente WHERE id = "'.$id.'" LIMIT 1');
+        $del = mysqli_query($link, 'DELETE FROM loja_produto WHERE id = "'.$id.'" LIMIT 1');
 
         if($del){
-            header('Location: vendas.php?retorno=1');
+            header('Location: produtos.php?retorno=1');
             exit();  
         }else{
-            header('Location: vendas.php?retorno=0');
+            header('Location: produtos.php?retorno=0');
             exit();   
         }
     }
@@ -73,38 +73,31 @@ if($acao == ''){
     <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Loja</th>
+                <th style="width: 10px;">ID</th>
                 <th>Cliente</th>
                 <th>Produto</th>
-                <th>Quantidade</th>
-                <th>Valor Total</th>
-            	<th style="width: 100px;">Opções</th>
+                <th style="width: 10px;">Valor</th>
+            	<th style="width: 10px;">Opções</th>
             </tr>
         </thead>
         <tbody>
         	<?
         		$sql_venda = mysqli_query($link, 'SELECT * FROM venda');
-                    while($venda = mysqli_fetch_array($sql_venda)){
-                        $sql_loja = mysqli_query($link, 'SELECT * FROM loja WHERE id = "'.$venda['id_loja'].'" LIMIT 1');
-                        $loja = mysqli_fetch_array($sql_loja);
+        		while($venda = mysqli_fetch_array($sql_venda)){
+                    $sql_cliente = mysqli_query($link, 'SELECT * FROM cliente WHERE id = "'.$venda['id_cliente'].'" LIMIT 1');
+                    $cliente = mysqli_fetch_array($sql_cliente);
 
-                        $sql_cliente = mysqli_query($link, 'SELECT * FROM cliente WHERE id = "'.$venda['id_cliente'].'" LIMIT 1');
-                        $cliente = mysqli_fetch_array($sql_cliente);
-
-                        $sql_produto = mysqli_query($link, 'SELECT * FROM loja_produto WHERE id = "'.$venda['id_loja_produto'].'" LIMIT 1');
-                        $produto = mysqli_fetch_array($sql_produto);
-                        
-                        echo '<tr>';
-                        echo '<td>'.$venda['id'].'</td>';
-                        echo '<td>'.$loja['nome'].'</td>';
-                        echo '<td>'.$cliente['nome'].'</td>';
-                        echo '<td>'.$produto['nome'].'</td>';
-                        echo '<td>'.$venda['quantidade'].'</td>';
-                        echo '<td><b>R$'.number_format($venda['valor_total'], 2, ',', '.').'</b></td>';
-                        echo '<td><a href="vendas.php?acao=editar&id='.$venda['id'].'" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a></td>';
-                        echo '</tr>';
-                    }
+                    $sql_produto = mysqli_query($link, 'SELECT * FROM loja_produto WHERE id = "'.$venda['id_loja_produto'].'" LIMIT 1');
+                    $produto = mysqli_fetch_array($sql_produto);
+                    
+        			echo '<tr>';
+        			echo '<td>'.$venda['id'].'</td>';
+                    echo '<td>'.$cliente['nome'].'</td>';
+                    echo '<td>'.$produto['nome'].'</td>';
+        			echo '<td><b>R$'.number_format($venda['valor_total'], 2, ',', '.').'</b></td>';
+                    echo '<td><a href="vendas.php?acao=editar&id='.$venda['id'].'" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Visualizar</a></td>';
+                    echo '</tr>';
+        		}
         	?>
         </tbody>
     </table>
@@ -122,21 +115,37 @@ if($acao == ''){
 }
 if($acao == 'editar' or $acao == 'novo'){
 ?>
-    <h2><b><?=(($acao == 'novo')?'Novo Usuário':$editar['nome'])?></b></h2><hr>
+    <h2><b><?=(($acao == 'novo')?'Novo Produto':'Editar '.$editar['nome'])?></b></h2><hr>
 
     <form method="POST" action="">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label>Nome</label>
-                <input type="text" class="form-control" name="txtnome" placeholder="Digite o nome do usuário." value="<?=(($acao == 'editar')?$editar['nome']:'')?>" required>
+                <input type="hidden" name="txtidloja" value="<?=$id_loja?>">
+                <input type="text" class="form-control" name="txtnome" placeholder="Digite o nome da loja." value="<?=(($acao == 'editar')?$editar['nome']:'')?>" required>
             </div>
-            <div class="col-md-4">
-                <label>E-mail</label>
-                <input type="text" name="txtemail" class="form-control" placeholder="Digite o e-mail do usuário." value="<?=(($acao == 'editar')?$editar['email']:'')?>" required>
+            <div class="col-md-2">
+                <label>Valor</label>
+                <input type="text" name="txtvalor" onkeyup="moeda(this)" class="form-control" placeholder="Digite o seu CPF." value="<?=(($acao == 'editar')?number_format($editar['valor'], 2, ',', '.'):'')?>">
             </div>
-            <div class="col-md-4">
-                <label>Senha</label>
-                <input type="password" class="form-control" name="txtsenha" <?=(($acao == 'editar')?'':'required')?>>
+            <div class="col-md-2">
+                <label>Quantidade</label>
+                <input type="text" class="form-control" name="txtquantidade" placeholder="Digite o nome da loja." value="<?=(($acao == 'editar')?$editar['quantidade']:'')?>" required>
+            </div>
+            <div class="col-md-2">
+                <label>Ativo</label>
+                <input type="text" name="txtativo" class="form-control" placeholder="Digite o seu CNPJ." value="<?=(($acao == 'editar')?$editar['ativo']:'')?>" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Descrição</label>
+                <textarea class="form-control" rows="5" name="txtdescricao"><?=(($acao == 'editar')?$editar['descricao']:'')?></textarea>
+            </div>
+            <div class="col-md-6">
+                <label>Foto Principal</label>
+                <input type="file" name="txtfotoprincipal" class="form-control">
             </div>
         </div>
         <hr>

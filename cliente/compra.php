@@ -1,23 +1,19 @@
 <?
-	session_start();
-	$_SESSION['pagina'] = 'compras';
+    session_start();
+    $_SESSION['pagina'] = 'compras';
     require_once('includes/topo.php');
-
     $acao           = ((isset($_REQUEST['acao']))?$_REQUEST['acao']:'');
     $id             = ((isset($_REQUEST['id']))?$_REQUEST['id']:'');
-
     $sql            = mysqli_query($link, 'SELECT * FROM venda WHERE id_cliente = "'.$_SESSION['clienteid'].'" AND id = "'.$id.'" LIMIT 1');
     
     if(!$sql){
         header('Location: compra.php');
         exit();
     }
-
     $venda = mysqli_fetch_array($sql);
     
     $sql_produto = mysqli_query($link, 'SELECT * FROM loja_produto WHERE id = "'.$venda['id_loja_produto'].'" LIMIT 1');
     $produto = mysqli_fetch_array($sql_produto);
-
     $sql_loja = mysqli_query($link, 'SELECT * FROM loja WHERE id = "'.$venda['id_loja'].'" LIMIT 1');
     $loja = mysqli_fetch_array($sql_loja);
 ?>
@@ -40,5 +36,4 @@
     </div>
 <?
     require_once('includes/rodape.php');
-?>      
-    
+?> 

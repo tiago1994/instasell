@@ -71,10 +71,10 @@ if($acao == ''){
     <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>ID</th>
+                <th style="width: 10px;">ID</th>
                 <th>Nome</th>
                 <th>Email</th>
-                <th>CPF</th>
+                <th style="width: 10px;">CPF</th>
             	<th style="width: 100px;">Opções</th>
             </tr>
         </thead>
@@ -87,7 +87,7 @@ if($acao == ''){
         			echo '<td>'.$lojistas['nome'].'</td>';
                     echo '<td>'.$lojistas['email'].'</td>';
                     echo '<td>'.$lojistas['cpf'].'</td>';
-        			echo '<td><a href="lojistas.php?acao=editar&id='.$lojistas['id'].'" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a> <a href="lojistas.php?acao=deletar&id='.$lojistas['id'].'" class="btn btn-danger btn-xs btnremover"><i class="fa fa-trash"></i></a></td>';
+        			echo '<td><a href="lojistas.php?acao=editar&id='.$lojistas['id'].'" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Editar</a> <a href="lojistas.php?acao=deletar&id='.$lojistas['id'].'" class="btn btn-danger btn-xs btnremover"><i class="fa fa-trash"></i> Excluir</a></td>';
                     echo '</tr>';
         		}
         	?>
