@@ -111,7 +111,7 @@ if($acao == 'editar' or $acao == 'novo'){
 
     <form method="POST" action="">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label>Loja</label>
                 <select class="form-control" name="txtidloja">
                     <?
@@ -126,34 +126,40 @@ if($acao == 'editar' or $acao == 'novo'){
                     ?>
                 </select>
             </div>
-            <div class="col-md-4">
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
                 <label>Nome</label>
-                <input type="text" class="form-control" name="txtnome" placeholder="Digite o nome da lojistas." value="<?=(($acao == 'editar')?$editar['nome']:'')?>" required>
+                <input type="text" class="form-control" name="txtnome" placeholder="Digite o nome do lojista." value="<?=(($acao == 'editar')?$editar['nome']:'')?>" required>
             </div>
-         	<div class="col-md-4">
+         	<div class="col-md-6">
                 <label>Email</label>
-                <input type="text" name="txtemail" class="form-control" placeholder="Digite o seu CNPJ." value="<?=(($acao == 'editar')?$editar['email']:'')?>">
+                <input type="text" name="txtemail" class="form-control" placeholder="Digite o seu e-mail." value="<?=(($acao == 'editar')?$editar['email']:'')?>">
             </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label>Senha</label>
-                <input type="text" name="txtsenha" class="form-control" placeholder="Digite o seu CPF." value="<?=(($acao == 'editar')?$editar['senha']:'')?>">
+                <input type="text" name="txtsenha" class="form-control" placeholder="Digite o senha.">
             </div>
-            <div class="col-md-4">
-                <label>Avatar</label>
-                <input type="text" class="form-control" name="txtavatar" placeholder="Digite o nome da lojistas." value="<?=(($acao == 'editar')?$editar['avatar']:'')?>" required>
-            </div>
-         	<div class="col-md-4">
+         	<div class="col-md-3">
                 <label>CPF</label>
                 <input type="text" name="txtcpf" class="form-control" placeholder="Digite o seu CNPJ." value="<?=(($acao == 'editar')?$editar['cpf']:'')?>" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Avatar</label>
+                <input type="file" name="txtavatar" class="form-control">
             </div>
         </div>
         <hr>
         <div class="row">
             <div class="col-md-12">
-                <input type="submit" class="btn btn-success pull-right" name="<?=(($acao == 'novo')?'btn-adicionar':'btn-atualizar')?>" value="<?=(($acao == 'novo')?'Adicionar':'Salvar')?>">
+                <input type="submit" class="btn btn-primary pull-right" name="<?=(($acao == 'novo')?'btn-adicionar':'btn-atualizar')?>" value="<?=(($acao == 'novo')?'Adicionar':'Salvar')?>">
             </div>
         </div>
         <!-- /.row -->

@@ -121,52 +121,52 @@ if($acao == 'editar' or $acao == 'novo'){
 
     <form method="POST" action="">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label>Nome</label>
                 <input type="text" class="form-control" name="txtnome" placeholder="Digite o nome da loja." value="<?=(($acao == 'editar')?$editar['nome']:'')?>" required>
             </div>
-         	<div class="col-md-4">
+         	<div class="col-md-3">
                 <label>CNPJ</label>
                 <input type="text" name="txtcnpj" class="form-control" placeholder="Digite o seu CNPJ." value="<?=(($acao == 'editar')?$editar['cnpj']:'')?>">
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label>CPF</label>
                 <input type="text" name="txtcpf" class="form-control" placeholder="Digite o seu CPF." value="<?=(($acao == 'editar')?$editar['cpf']:'')?>">
             </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label>Estado</label>
                 <input type="text" class="form-control" name="txtestado" placeholder="Digite o nome da loja." value="<?=(($acao == 'editar')?$editar['estado']:'')?>" required>
             </div>
-         	<div class="col-md-4">
+         	<div class="col-md-3">
                 <label>Cidade</label>
                 <input type="text" name="txtcidade" class="form-control" placeholder="Digite o seu CNPJ." value="<?=(($acao == 'editar')?$editar['cidade']:'')?>" required>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label>Endereço</label>
                 <input type="text" name="txtendereco" class="form-control" placeholder="Digite o seu CPF." value="<?=(($acao == 'editar')?$editar['endereco']:'')?>" required>
             </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label>Número</label>
                 <input type="text" class="form-control" name="txtnumero" placeholder="Digite o nome da loja." value="<?=(($acao == 'editar')?$editar['numero']:'')?>" required>
             </div>
-         	<div class="col-md-4">
+         	<div class="col-md-3">
                 <label>Complemento</label>
                 <input type="text" name="txtcomplemento" class="form-control" placeholder="Digite o seu CNPJ." value="<?=(($acao == 'editar')?$editar['complemento']:'')?>">
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label>Logo</label>
-                <input type="text" name="txtlogo" class="form-control" placeholder="Digite o seu CPF." value="<?=(($acao == 'editar')?$editar['logo']:'')?>" required>
+                <input type="file" name="txtlogo" class="form-control">
             </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label>Ativo</label>   
                 <select class="form-control" name="txtativo">
                     <option value="1" <?=(($acao == 'editar')?(($editar['ativo'] == 1)?'selected = "selected"':''):'')?>>Sim</option>
